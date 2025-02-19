@@ -3,7 +3,7 @@
 // ---------------------------- CURSO 2024/25 --------------------------------
 // ----------------------------- SESION1.CPP ---------------------------------
 //============================================================================
-
+// Daniel Barrantes Pulido y Pedro Fernández Germán, Lab 8
 
 #include <stdio.h>
 #include <iostream>
@@ -52,10 +52,24 @@ int main()
  }
 
  cout<<"Interfaz elegida: "<< pAux->name<<endl;
-
+//
  setDeviceName(&iface, pAux->name);
  GetMACAdapter(&iface);
- //cout<<"La MAC es: "<<PrintMACAdapter(&iface)<<endl; 
+ //
+ cout<<"La MAC es: "<<endl; 
+ //Se muestra la dirección MAC, pasandola de hexadecimal a binario
+   for(int b = 0; b<6; b++){
+         printf("%02x:", iface.MACaddr[b]);
+    }
+   printf("%02X", iface.MACaddr[6]);
+   printf("\n");
+ //
 
  return 0;
 }
+ //PrintMACAdapter(&iface); 
+//Pasar mac de hexadecimal a binario    
+
+
+
+ 
