@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "linkLayer.h"
+#include "gestionCaracteres.h"
 
 
 
@@ -17,12 +18,18 @@ using namespace std;
 
 int main()
 {
+
+ unsigned char mac_src[6]={0x00, 0x00, 0x00, 0x00,0x00, 0x00};
+ unsigned char mac_dst[6]={0x00, 0x01, 0x02, 0x03,0x04, 0x05};
+ unsigned char type[2]={0x30,0x00};
+ char car;
  interface_t iface;
  pcap_if_t *avail_ifaces=NULL;
  pcap_if_t *pAux = NULL;
  
  int opt = 0;
  int ifaces = 0;
+ unsigned char tecla = 0;
  
  
  printf("\n----------------------------\n");
@@ -64,7 +71,16 @@ int main()
    printf("%02X", iface.MACaddr[6]);
    printf("\n");
  //
+ 
+ while(tecla != 27){
+   if(kbhit()){
 
+      //cout<<"El caracter enviado es " <<endl;
+      tecla = getch();
+      enviarCaracter(&iface, tecla, mac_src, mac_dst, type);
+   } else{
+   }
+ }
  return 0;
 }
  //PrintMACAdapter(&iface); 
