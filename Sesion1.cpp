@@ -91,9 +91,12 @@ int main()
       //cout<<"El caracter enviado es " <<endl;
       tecla = getch();
       enviarCaracter(&iface, tecla, mac_src, mac_dst, type);
-   } else{
+  } 
+   else{
+    RecibirCaracter(&iface);
    }
  }
+
  return 0;
 }
  //PrintMACAdapter(&iface); 

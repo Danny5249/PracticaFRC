@@ -15,10 +15,10 @@ typedef struct assembled_Packet {
     const unsigned char *packet;
 }apacket_t;
 
-/*typedef struct datos{
+typedef struct datos{
         unsigned char *paquete;
         int frameSize;
-}datos;*/
+}datos;
 
 typedef struct nodo {
     apacket_t info;
