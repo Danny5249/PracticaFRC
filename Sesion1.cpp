@@ -58,6 +58,8 @@ int main()
     pAux = pAux->next;
  }
 
+//__fpurge(stdin); dunno how this shit works 
+
  cout<<"Interfaz elegida: "<< pAux->name<<endl;
 //
  setDeviceName(&iface, pAux->name);
@@ -70,7 +72,18 @@ int main()
     }
    printf("%02X", iface.MACaddr[6]);
    printf("\n");
- //
+ //Abrimos el puerto
+ int puerto = OpenAdapter(&iface);
+ if(puerto !=0){
+   cout<<"Error al abrir el puerto"<<endl;
+   getch();
+   return (1);
+ } else{
+   cout<<"Puerto abierto correctamente"<<endl;
+ }
+
+ 
+
  
  while(tecla != 27){
    if(kbhit()){
