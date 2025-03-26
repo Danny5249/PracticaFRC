@@ -24,6 +24,7 @@ void EnviarFichero(interface_t *iface, unsigned char *mac_dst, unsigned char *ty
             }
             unsigned char *trama = BuildFrame(iface->MACaddr, mac_dst, type, trama_envio); //Construimos la trama
             SendFrame(iface, trama, f.gcount()); //Enviamos la trama. Repetimos hasta que se llegue al final del fichero.
+            free(trama);
         }
        
     }
@@ -43,6 +44,7 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
     
     bool esc = false;
     char tecla;
+    char caracter;
     cout << "Selección de modo" << endl
     << "\t[F1] Envío de caracteres interactivo" << endl
     << "\t[F2] Envío de un fichero" << endl
@@ -59,7 +61,13 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
                         switch (tecla)
                         {
                         case 'P':
-                            //enviarcaracter
+                        while(caracter != 27){
+                            RecibirCaracter(iface);
+                            if(kbhit()){
+                                caracter = getch();
+                                enviarCaracter(iface, caracter, iface->MACaddr, mac_dst, type);
+                            }
+                            }
                             break;
                         case 'Q':
                         EnviarFichero(iface, mac_dst, type);

@@ -30,15 +30,19 @@ char RecibirCaracter(interface *iface){
     apacket_t tRecibida;
     tRecibida = ReceiveFrame(iface);
     //cout<<tRecibida.packet[14]<<endl;
+    unsigned char datosTrama[255];
     if(tRecibida.packet != nullptr && tRecibida.packet[14] > 0){
         int i = 14;
-        unsigned char datosTrama;
+        int z = 0;
+        
         while(tRecibida.header.len > i){
-            datosTrama = tRecibida.packet[i];
-            cout<< datosTrama <<endl;
+            datosTrama[z] = tRecibida.packet[i];
             i++;
-        }     
-        cout<< "Número de carácteres recibidos:" << tRecibida.header.len << endl;
+            z++;
+        }
+        cout<< datosTrama <<endl;
+        cout<< "Número de carácteres recibidos:" << tRecibida.header.len - 14 << endl;
+        
     }
     else{
         return 0;
