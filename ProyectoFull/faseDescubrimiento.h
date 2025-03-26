@@ -8,6 +8,7 @@
 
 void ModoMaestro(int nGrupo, interface_t *iface);
 void ModoEsclavo(int nGrupo, interface_t *iface);
+int faseDescubrimiento(int nGrupo, char opt, interface_t *iface);
 void EnviarFichero(interface_t *iface, unsigned char *mac_dst, unsigned char *type);
 
 #endif
