@@ -22,7 +22,10 @@ int main()
  unsigned char mac_src[6]={0x00, 0x00, 0x00, 0x00,0x00, 0x00};
  unsigned char mac_dst[6]={0x00, 0x01, 0x02, 0x03,0x04, 0x05};
  unsigned char type[2]={0x30,0x00};
+
  char car;
+ int n_grupo;
+
  interface_t iface;
  pcap_if_t *avail_ifaces=NULL;
  pcap_if_t *pAux = NULL;
@@ -72,6 +75,11 @@ int main()
     }
    printf("%02X", iface.MACaddr[6]);
    printf("\n");
+
+ //Indicamos el numero de grupo
+ cout<< "Indica el numero de grupo: "<<endl;
+ cin>>n_grupo;
+
  //Abrimos el puerto
  int puerto = OpenAdapter(&iface);
  if(puerto !=0){
@@ -82,7 +90,18 @@ int main()
    cout<<"Puerto abierto correctamente"<<endl;
  }
 
+ //Seleccionamos el modo de la estacion
+ cout<< "Seleccione el modo de la estacion:" <<endl;
+ cout<< "    [1] Modo Maestra"<<endl;
+ cout<< "    [2] Modo Esclava"<<endl;
+ cin>>opt; //Ahora opt guardara el modo de la estacion
+
+ if(faseDescubrimiento(n_grupo, opt, iface)){
+    hacerCosas();
+ } else{
+   print("Error masivo mortal")
  
+  
 
  
  while(tecla != 27){
