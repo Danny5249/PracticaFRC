@@ -35,10 +35,10 @@ char RecibirCaracter(interface *iface){
         unsigned char datosTrama;
         while(tRecibida.header.len > i){
             datosTrama = tRecibida.packet[i];
-            cout<< "caracter recibido: "<< datosTrama <<endl;
+            cout<< datosTrama <<endl;
             i++;
-        }
-        
+        }     
+        cout<< "Número de carácteres recibidos:" << tRecibida.header.len << endl;
     }
     else{
         return 0;
@@ -46,4 +46,6 @@ char RecibirCaracter(interface *iface){
     
     return 0;
 }
+
+
 

@@ -9,6 +9,8 @@
 #include <iostream>
 #include "linkLayer.h"
 #include "gestionCaracteres.h"
+#include "faseDescubrimiento.h"
+#include "faseTransferencia.h"
 
 
 
@@ -95,12 +97,13 @@ int main()
  cout<< "    [1] Modo Maestra"<<endl;
  cout<< "    [2] Modo Esclava"<<endl;
  cin>>opt; //Ahora opt guardara el modo de la estacion
-
- if(faseDescubrimiento(n_grupo, opt, iface)){
-    hacerCosas();
- } else{
-   print("Error masivo mortal")
  
+ if(faseDescubrimiento(n_grupo, opt, &iface, mac_dst)){
+    faseTransferencia(&iface, opt, mac_dst, type);
+ } else{
+   printf("Error masivo mortal");
+ }
+
   
 
  
@@ -124,5 +127,3 @@ int main()
 // Trama respuesta (trama sin datos, mac_origen = worker, mac_destino = master)
 //ifconfig = informacion de las interfaces disponibles
 
-
- 

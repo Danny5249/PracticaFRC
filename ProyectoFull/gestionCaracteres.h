@@ -11,4 +11,5 @@
 void enviarCaracter(interface_t *iface, unsigned char c, unsigned char mac_src[], unsigned char mac_dst[], unsigned char tipo[]);
 char RecibirCaracter(interface *iface);
 
+
 #endif
