@@ -81,6 +81,18 @@ void ModoEsclavo(int nGrupo, interface_t *iface){
 }
 }
 
+int faseDescubrimiento(int n_grupo, char opt, interface_t *iface){
+    if(opt == 1){
+        ModoMaestro(n_grupo, iface);
+        return 1;
+    }
+
+    if(opt == 2){
+        ModoEsclavo(n_grupo, iface);
+        return 1;
+    }
+    return 0;
+}
 
 void EnviarFichero(interface_t *iface, unsigned char *mac_dst, unsigned char *type){
     ifstream f;
