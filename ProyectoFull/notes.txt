@@ -1,0 +1,61 @@
+modoMaestro(nGrupo){
+type=[48+nºgrupo, 0x01]
+buildHeader(macBroadcast, macOrigen, type)
+sendframe()
+while(!Recibido){}
+trama = receiveFrame()
+SI TRAMA[12] == type[0] && TRAMA[13] ==0x02{
+sacarMac()
+}
+}
+
+
+
+modoEsclavo(){
+type=[48+nºgrupo, 0x02]
+while(!Recibamos){
+trama = receiveFRame()
+SI TRAMA[12] == type[0] && trama[13] == 0x01 {
+sacarMacOrigen()
+}
+}
+buildFrame()
+sendFrame()
+}
+
+cuando termina la fase de descubrimiento, el type de 02 pasa a 00
+
+[27,O, tecla especial]
+F1 = P 
+F2 = Q 
+F3 = R 
+F4 = S 
+
+
+
+gestionFicheros
+    enviarFichero
+    ifstream f
+    f.open('envio.txt')
+    char cad[255]
+    if(f.isOpen()){
+        while(!eof){
+            f.read(cad, 254)
+            cad[f.gcount()] = '/0'
+        }
+        construir trama
+        enviar trama
+    }
+
+
+
+    menú:
+
+    while(!27){
+        if(modo == 2){
+            recibir
+        }
+        if(kbhit){
+            getch()  hay que comparar que sea 27, O, P o Q
+        }
+    }
