@@ -72,10 +72,7 @@ void ModoEsclavo(int nGrupo, interface_t *iface){
                     printf("\n");
                     unsigned char *tramaDescubrimiento = BuildHeader(iface->MACaddr, mac_dst, type);
                     SendFrame(iface, tramaDescubrimiento, 0);
-
-                    cout << "Selección de modo" << endl
-                    << "\t[F1] Envío de caracteres interactivo" << endl
-                    << "\t[ESC] Salir " << endl;
+                    
                 }
             }   
         }
