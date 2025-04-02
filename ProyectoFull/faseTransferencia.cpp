@@ -61,6 +61,7 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
                         switch (tecla)
                         {
                         case 'P':
+                        cout << "" << endl;
                         cout<<"Envío de caracteres interactivo. Pulse caracteres a enviar."<<endl;
                         cout<<"Pulse [ESC] para volver."<<endl;
 
@@ -76,7 +77,8 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
                         
                         caracter = 0;
 
-                        cout << "Selección de modo" << endl
+                        cout << "" << endl
+                            << "Selección de modo" << endl
                             << "\t[F1] Envío de caracteres interactivo" << endl
                             << "\t[F2] Envío de un fichero" << endl
                             << "\t[ESC] Salir " << endl;
@@ -96,7 +98,8 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
 
                         caracter = 0;
 
-                        cout << "Selección de modo" << endl
+                        cout << "" << endl
+                            << "Selección de modo" << endl
                             << "\t[F1] Envío de caracteres interactivo" << endl
                             << "\t[F2] Envío de un fichero" << endl
                             << "\t[ESC] Salir " << endl;
@@ -137,7 +140,7 @@ void TransferenciaEsclava(interface_t *iface, unsigned char *mac_dst, unsigned c
                         switch (tecla)
                         {
                         case 'P':
-
+                        cout << "" << endl;
                         cout<<"Envío de caracteres interactivo. Pulse caracteres a enviar."<<endl;
                         cout<<"Pulse [ESC] para volver."<<endl;
                         
@@ -148,12 +151,13 @@ void TransferenciaEsclava(interface_t *iface, unsigned char *mac_dst, unsigned c
                                 if(caracter !=27){
                                 enviarCaracter(iface, caracter, iface->MACaddr, mac_dst, type);
                                 }
-                            }
+                            } 
                         }
 
                         caracter = 0;
 
-                        cout << "Selección de modo" << endl
+                        cout << "" << endl
+                            << "Selección de modo" << endl
                             << "\t[F1] Envío de caracteres interactivo" << endl
                             << "\t[ESC] Salir " << endl;
                            
