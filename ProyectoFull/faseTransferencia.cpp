@@ -55,22 +55,52 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
             tecla = getch();
             if(tecla == 27 && kbhit()){
                 tecla = getch();
-                if (tecla == 'O'){
+                if(tecla == 'O'){
                     if(kbhit()){
                         tecla = getch();
                         switch (tecla)
                         {
                         case 'P':
+                        cout<<"Envío de caracteres interactivo. Pulse caracteres a enviar."<<endl;
+                        cout<<"Pulse [ESC] para volver."<<endl;
+
                         while(caracter != 27){
                             RecibirCaracter(iface);
                             if(kbhit()){
                                 caracter = getch();
-                                enviarCaracter(iface, caracter, iface->MACaddr, mac_dst, type);
-                            }
-                            }
-                            break;
+                                if(caracter != 27){
+                                    enviarCaracter(iface, caracter, iface->MACaddr, mac_dst, type);
+                                }
+                            }   
+                        }
+                        
+                        caracter = 0;
+
+                        cout << "Selección de modo" << endl
+                            << "\t[F1] Envío de caracteres interactivo" << endl
+                            << "\t[F2] Envío de un fichero" << endl
+                            << "\t[ESC] Salir " << endl;
+
+                        break;
+                        
                         case 'Q':
+                        cout<<"Envio de fichero. Se enviará el fichero de prueba."<<endl;
                         EnviarFichero(iface, mac_dst, type);
+                        cout<<"Pulse [ESC] para volver"<<endl;
+
+                        while(caracter != 27){
+                            if(kbhit()){
+                                caracter = getch();
+                            }
+                        }
+
+                        caracter = 0;
+
+                        cout << "Selección de modo" << endl
+                            << "\t[F1] Envío de caracteres interactivo" << endl
+                            << "\t[F2] Envío de un fichero" << endl
+                            << "\t[ESC] Salir " << endl;
+
                         break;
                         
                         default:
@@ -107,13 +137,25 @@ void TransferenciaEsclava(interface_t *iface, unsigned char *mac_dst, unsigned c
                         switch (tecla)
                         {
                         case 'P':
+
+                        cout<<"Envío de caracteres interactivo. Pulse caracteres a enviar."<<endl;
+                        cout<<"Pulse [ESC] para volver."<<endl;
+                        
                         while(caracter != 27){
-                        RecibirCaracter(iface);
-                        if(kbhit()){
-                            caracter = getch();
-                            enviarCaracter(iface, caracter, iface->MACaddr, mac_dst, type);
+                            RecibirCaracter(iface);
+                            if(kbhit()){
+                                caracter = getch();
+                                if(caracter !=27){
+                                enviarCaracter(iface, caracter, iface->MACaddr, mac_dst, type);
+                                }
+                            }
                         }
-                        }
+
+                        caracter = 0;
+
+                        cout << "Selección de modo" << endl
+                            << "\t[F1] Envío de caracteres interactivo" << endl
+                            << "\t[ESC] Salir " << endl;
                            
                             break;
                        
