@@ -30,7 +30,8 @@ char RecibirCaracter(interface *iface){
     apacket_t tRecibida;
     tRecibida = ReceiveFrame(iface);
     //cout<<tRecibida.packet[14]<<endl;
-    unsigned char datosTrama[255]; //  unsigned char *datosTrama = malloc(255 * sizeof(unsigned char));
+    unsigned char *datosTrama;
+    malloc(255 * sizeof(unsigned char)); //  unsigned char *datosTrama = malloc(255 * sizeof(unsigned char));
     if(tRecibida.packet != nullptr && tRecibida.packet[14] > 0){
         int i = 14;
         int z = 0;
@@ -45,10 +46,10 @@ char RecibirCaracter(interface *iface){
         
     }
     else{
-        //free(datosTrama);
+        free(datosTrama);
         return 0;
     }
-    //free(datosTrama);
+    free(datosTrama);
     return 0;
 }
 
