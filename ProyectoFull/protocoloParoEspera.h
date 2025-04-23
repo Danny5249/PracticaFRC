@@ -9,10 +9,9 @@
 
 
 void faseEstablecimiento();
-unsigned char* tramaDeEstablecimiento(interface *iface, unsigned char mac_dst[], unsigned char type[], char R, int prot, int num);
-void faseTransferencia();
+void faseTransferenciaBCE();
 void faseLiberacion();
-int calculoBCE();
+unsigned char calculoBCE(unsigned char cad[]);
 
 
 #endif

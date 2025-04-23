@@ -3,23 +3,12 @@
 
 using namespace std;
 
-unsigned char* tramaDeEstablecimiento(interface *iface, unsigned char mac_dst[], unsigned char type[], int prot, int num){
 
-    unsigned char camposControl[3];
-    camposControl[0] = 'R';
-    camposControl[1] = prot;
-    camposControl[2] = num;
-
-    unsigned char *tramaControl = BuildFrame(iface->MACaddr, mac_dst, type, camposControl);
-    return tramaControl;
+void faseEstablecimiento(){
 
 }
 
-void faseDescubrimiento(){
-
-}
-
-void faseTransferencia(){
+void faseTransferenciaBCE(){
 
 }
 
@@ -27,6 +16,15 @@ void faseLiberacion(){
 
 }
 
-int calculoBCE(){
-    
+unsigned char calculoBCE(char cad[]){
+    unsigned char bce = cad[0];
+    for(int i = 1; i < sizeof(cad); i++){
+        bce = bce ^ cad[i];
+    }
+
+    if (bce == 0 || bce == 0xFF){
+        return 1;
+    } else {
+        return bce;
+    }
 }
