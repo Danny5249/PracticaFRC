@@ -22,7 +22,6 @@ void EnviarFichero(interface_t *iface, unsigned char *mac_dst, unsigned char *ty
                     trama_envio[i] = cad[i];  
                 }
             }
-            fin_trama = false;
             unsigned char *trama = BuildFrame(iface->MACaddr, mac_dst, type, trama_envio); //Construimos la trama
             SendFrame(iface, trama, f.gcount()); //Enviamos la trama. Repetimos hasta que se llegue al final del fichero.
             free(trama);
