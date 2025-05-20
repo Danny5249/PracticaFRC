@@ -44,11 +44,8 @@ char RecibirCaracter(interface *iface){
         cout<< "Número de carácteres recibidos:" << tRecibida.header.len - 14 << endl;
         
     }
-    else{
-        //free(datosTrama);
-        return 0;
-    }
-    //free(datosTrama);
+   
+   // free(datosTrama);
     return 0;
 }
 

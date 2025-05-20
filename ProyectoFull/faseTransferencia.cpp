@@ -1,4 +1,5 @@
 #include "faseTransferencia.h"
+#include "protocoloParoEspera.h"
 using namespace std;
 
 
@@ -22,6 +23,7 @@ void EnviarFichero(interface_t *iface, unsigned char *mac_dst, unsigned char *ty
                     trama_envio[i] = cad[i];  
                 }
             }
+            fin_trama = false;
             unsigned char *trama = BuildFrame(iface->MACaddr, mac_dst, type, trama_envio); //Construimos la trama
             SendFrame(iface, trama, f.gcount()); //Enviamos la trama. Repetimos hasta que se llegue al final del fichero.
             free(trama);
@@ -48,6 +50,7 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
     cout << "Selección de modo" << endl
     << "\t[F1] Envío de caracteres interactivo" << endl
     << "\t[F2] Envío de un fichero" << endl
+    << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
     << "\t[ESC] Salir " << endl;
    
     while(!esc){
@@ -81,11 +84,12 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
                             << "Selección de modo" << endl
                             << "\t[F1] Envío de caracteres interactivo" << endl
                             << "\t[F2] Envío de un fichero" << endl
+                            << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
                             << "\t[ESC] Salir " << endl;
 
                         break;
                         
-                        case 'Q':
+                        case 'R':
                         cout<<"Envio de fichero. Se enviará el fichero de prueba."<<endl;
                         EnviarFichero(iface, mac_dst, type);
                         cout<<"Pulse [ESC] para volver"<<endl;
@@ -102,10 +106,35 @@ void TransferenciaMaestra(interface_t *iface, unsigned char *mac_dst, unsigned c
                             << "Selección de modo" << endl
                             << "\t[F1] Envío de caracteres interactivo" << endl
                             << "\t[F2] Envío de un fichero" << endl
+                            << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
                             << "\t[ESC] Salir " << endl;
 
                         break;
                         
+                        case 'Q':
+                        cout<<"Protocolo paro y espera."<<endl;
+                        cout<<"Estás en modo maestro"<<endl;
+
+                        faseEstablecimiento(iface, 1, mac_dst,type);
+                        faseTransferenciaBCE(iface, 1, mac_dst,type);
+                        cout<<"Pulse [ESC] para volver"<<endl;
+
+                        while(caracter != 27){
+                            if(kbhit()){
+                                caracter = getch();
+                            }
+                        }
+
+                        caracter = 0;
+
+                        cout << "" << endl
+                            << "Selección de modo" << endl
+                            << "\t[F1] Envío de caracteres interactivo" << endl
+                            << "\t[F2] Envío de un fichero" << endl
+                            << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
+                            << "\t[ESC] Salir " << endl;
+
+                        break;
                         default:
                             break;
                         }
@@ -126,6 +155,7 @@ void TransferenciaEsclava(interface_t *iface, unsigned char *mac_dst, unsigned c
 
     cout << "Selección de modo" << endl
     << "\t[F1] Envío de caracteres interactivo" << endl
+    << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
     << "\t[ESC] Salir " << endl;
 
     while(!esc){
@@ -159,11 +189,35 @@ void TransferenciaEsclava(interface_t *iface, unsigned char *mac_dst, unsigned c
                         cout << "" << endl
                             << "Selección de modo" << endl
                             << "\t[F1] Envío de caracteres interactivo" << endl
+                            << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
                             << "\t[ESC] Salir " << endl;
                            
                             break;
                        
-                        
+                        case 'Q':
+
+                        cout<<"Protocolo paro y espera."<<endl;
+                        cout<<"Estás en modo esclavo"<<endl;
+
+                        faseEstablecimiento(iface, 2, mac_dst,type);
+                        faseTransferenciaBCE(iface, 2, mac_dst,type);
+                        cout<<"Pulse [ESC] para volver"<<endl;
+
+                        while(caracter != 27){
+                            if(kbhit()){
+                                caracter = getch();
+                            }
+                        }
+
+                        caracter = 0;
+
+                        cout << "" << endl
+                            << "Selección de modo" << endl
+                            << "\t[F1] Envío de caracteres interactivo" << endl
+                            << "\t[F3] Protocolo paro y espera - Seleccion" <<endl
+                            << "\t[ESC] Salir " << endl;
+                        break;
+
                         default:
                             break;
                         }
